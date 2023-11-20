@@ -1,0 +1,145 @@
+.Main {
+  height: 100%;
+  padding: 0 10px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Main > * {
+  margin: 3px 0;
+}
+
+.Main-primary-subheading {
+  font-weight: 700;
+  color: #fe9e0d;
+  font-size: 1.15rem;
+}
+
+.header {
+  margin-top: 8rem;
+  text-align: center;
+  word-break:keep-all;
+  margin-bottom: 0rem;
+} 
+
+.header p {
+  margin: 5px 0;
+}
+
+.header h1 {
+  color: #333333;
+  font-family: Verdana, sans-serif, 'Segoe UI', Tahoma  ;
+}
+
+.code {
+  padding: 5px;
+  color: greenyellow;
+  background-color: black;
+  border-radius: 5px;
+}
+
+.content > img {
+  display: none;
+  width: 100%;
+  max-width: 720px;
+  max-height: 500px;
+  border-radius: 10px;
+}
+
+.content > video {
+  display: none;
+  width: 100%;
+  max-width: 720px;
+  max-height: 500px;
+  border-radius: 10px;
+}
+.bg-content {
+  
+  display: inline-block; /* 컨텐츠의 크기를 유지하는 스타일 */
+  padding: 20px; /* 원하는 패딩 값을 설정 */
+  border-radius: 15px;
+  /* margin-bottom: 3rem; 버튼 아래 공백 */
+}
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* 기타 스타일 */
+}
+.content {
+  position: relative;
+}
+
+.content > canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+button {
+  text-decoration: none;
+  color: white;
+  background-color: black;
+  border: 2px solid black;
+  margin: 0 5px;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  color: black;
+  background-color: white;
+  border: 2px solid black;
+}
+
+.buttons-wrapper {
+  display: flex;
+  margin-top: 10px; /* 위쪽 간격 설정 */
+  margin-bottom: 10px; /* 위쪽 간격 설정 */
+  justify-content: center; /* 버튼들을 수평 가운데로 정렬하는 스타일 */
+  align-items: center;
+}
+
+.containerStyles {
+  margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.progressBarStyles {
+  flex: 1;
+  height: 20px;
+  background-color: #e0e0de;
+  border-radius: 50px;
+  margin: 0 10px;
+}
+
+.fillerStyles {
+  height: 100%;
+  width: 0; /* Initially 0, will be set dynamically using JavaScript */
+  background-color: inherit; /* Will be set dynamically using JavaScript */
+  transition: width 1s ease-in-out;
+  border-radius: inherit;
+  text-align: right;
+}
+
+.percentStyle {
+  padding: 5px;
+  color: white;
+  font-weight: bold;
+}
+
+.labelStyles {
+  padding: 5px;
+  color: blue;
+  font-weight: bold;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+}
