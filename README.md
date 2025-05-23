@@ -25,7 +25,7 @@
 
 ## ⚙️ 시스템 아키텍처
 
-![시스템 아키텍처](./assets/architecture.png)
+![시스템 아키텍처](src/images/architecture.png)
 
 **구성 요소:**
 
