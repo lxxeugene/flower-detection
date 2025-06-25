@@ -23,6 +23,15 @@ app.use("/naver-shopping", require("./routes/naverShopping"));
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+app.use((err, req, res, next) => {
+  console.error("🔥 에러 발생:", err.message);
+  res.status(err.status || 500).json({
+    success: false,
+    message: err.message || "서버 내부 오류",
+  });
+});
+
 //const express = require("express");
 //const axios = require("axios");
 //const mongoose = require("mongoose");

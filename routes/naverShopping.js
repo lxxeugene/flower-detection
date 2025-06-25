@@ -1,13 +1,21 @@
 const express = require("express");
 const axios = require("axios");
 const router = express.Router();
+const errorResponse = require("../utils/errorResponse");
 
 router.get("/", async (req, res) => {
   const flowername = req.query.flowername;
-  if (!flowername) return res.status(400).json({ error: "Flowername is required" });
+  if (!flowername) {
+    return errorResponse(res, 400, "flowername query 파라미터가 필요합니다.");
+  }
 
   const clientId = process.env.NAVER_CLIENT_ID;
   const clientSecret = process.env.NAVER_CLIENT_SECRET;
+
+  if (!clientId || !clientSecret) {
+    return errorResponse(res, 500, "네이버 API 인증 정보가 없습니다.");
+  }
+
   const categoryId = "50001805";
   const displayPerPage = 100;
   const maxResults = 1000;
@@ -35,11 +43,10 @@ router.get("/", async (req, res) => {
       start += displayPerPage;
     }
 
-    console.log(`총 ${allResults.length}개의 검색 결과`);
     res.json({ items: allResults });
   } catch (error) {
-    console.error("네이버 쇼핑 API 오류:", error);
-    res.status(500).json({ error: "Naver Shopping API error" });
+    console.error("네이버 쇼핑 API 오류:", error.message);
+    return errorResponse(res, 500, "네이버 쇼핑 API 호출 실패");
   }
 });
 
