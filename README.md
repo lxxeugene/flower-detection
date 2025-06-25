@@ -66,7 +66,10 @@ flower-detection/
 │   ├── components/
 │   ├── style/
 │   └── App.jsx
-├── server.js         # Express 백엔드
+├── config/
+├── models/
+├── routes/
+├── server.js
 └── README.md
 ```
 
