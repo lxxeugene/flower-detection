@@ -23,7 +23,12 @@ const SearchResult = (props) => {
         const response = await axios.get(
           `http://localhost:8000/flowers?flowername=${label}`
         );
-        setFlowerInfo(response.data);
+        const flower = response.data;
+        setFlowerInfo(flower);
+        //히스토리 추가
+        const prev = JSON.parse(localStorage.getItem("flowerHistory")) || [];
+        const updated = [flower, ...prev.filter(f => f.flowername !== flower.flowername)];
+        localStorage.setItem("flowerHistory", JSON.stringify(updated.slice(0, 10)));
       } catch (error) {
         console.error("Error searching for flower:", error);
         setFlowerInfo(null);

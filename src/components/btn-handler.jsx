@@ -134,6 +134,32 @@ const ButtonHandler = ({ imageRef, cameraRef, handleResetMyDict }) => {
           )}
         </div>
       </Stack>
+      {/* 이전 검색한 꽃 리스트 (히스토리) */}
+      <div style={{ marginTop: "2rem", padding: "0 1rem" }}>
+        <h3 style={{ textAlign: "center", color: "#444" }}>이전 검색한 꽃</h3>
+        <div style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          gap: "1rem",
+          marginTop: "1rem"
+        }}>
+          {(JSON.parse(localStorage.getItem("flowerHistory")) || []).map((f, i) => (
+            <div key={i} style={{
+              backgroundColor: "#f6f6f6",
+              borderRadius: "10px",
+              padding: "12px",
+              width: "160px",
+              boxShadow: "0 1px 4px rgba(0,0,0,0.1)"
+            }}>
+              <h4 style={{ margin: "0 0 4px", color: "#2e7d32" }}>{f.flowername_kr}</h4>
+              <p style={{ fontSize: "13px", margin: 0 }}>{f.flowername}</p>
+              <p style={{ fontSize: "12px", margin: "2px 0", color: "#777" }}>{f.habitat}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+
     </div>
   );
 };
