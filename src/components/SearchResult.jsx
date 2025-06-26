@@ -37,6 +37,26 @@ const SearchResult = (props) => {
     fetchFlowerInfo();
   }, [label]);
 
+const [memo, setMemo] = useState("");
+
+const handleAddToCollection = async () => {
+  const userId = localStorage.getItem("userId") || "guest"; // 로그인 구현 시 교체
+  const imageUrl = imageRef?.current?.src || ""; // 예: 업로드 이미지
+
+  try {
+    await axios.post("http://localhost:8000/collection", {
+      userId,
+      flower: flowerInfo,
+      memo,
+      imageUrl,
+    });
+    alert("🌼 도감에 저장되었습니다!");
+  } catch (error) {
+    console.error("도감 저장 오류:", error);
+    alert("❌ 도감 저장 실패");
+  }
+};
+
   // key 값을 이용하여 원하는 작업을 수행하거나, 컴포넌트에서 출력합니다.
   return (
     <div>
@@ -125,6 +145,32 @@ const SearchResult = (props) => {
                     />
                     네이버 쇼핑
                   </button>
+                </td>
+              </tr>
+              <tr>
+                <td colSpan={2}>
+                  <div style={{ marginTop: "1rem" }}>
+                    <h4>📝 도감 작성</h4>
+                    <textarea
+                      placeholder="메모를 남겨보세요"
+                      value={memo}
+                      onChange={(e) => setMemo(e.target.value)}
+                      style={{ width: "100%", minHeight: "60px", marginBottom: "0.5rem" }}
+                    />
+                    <button
+                      onClick={handleAddToCollection}
+                      style={{
+                        backgroundColor: "#4CAF50",
+                        color: "white",
+                        padding: "8px 12px",
+                        border: "none",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                      }}
+                    >
+                      도감에 추가
+                    </button>
+                  </div>
                 </td>
               </tr>
             </tbody>
