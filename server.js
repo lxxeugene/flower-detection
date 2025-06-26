@@ -19,6 +19,7 @@ app.use((req, res, next) => {
 // 라우터 연결
 app.use("/flowers", require("./routes/flowers"));
 app.use("/naver-shopping", require("./routes/naverShopping"));
+app.use("/naver-images", require("./routes/naverImage"));
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
