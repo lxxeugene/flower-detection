@@ -1,17 +1,29 @@
-router.post("/", async (req, res) => {
-  const { userId, flower, memo, imageUrl } = req.body;
+const express = require("express");
+const router = express.Router();
+const Collection = require("../models/Collection");
+const errorResponse = require("../utils/errorResponse");
 
-  if (!userId || !flower?.flowername) {
-    return res.status(400).json({ error: "필수 정보 누락" });
+router.post("/", async (req, res) => {
+  const { userId, flower, memo, date, imageBase64 } = req.body;
+
+  if (!flower || !date || !imageBase64) {
+    return errorResponse(res, 400, "필수 데이터 누락");
   }
 
   try {
-    const exists = await Collection.findOne({ userId, "flower.flowername": flower.flowername });
-    if (exists) return res.status(409).json({ error: "이미 도감에 존재합니다." });
-
-    const entry = await Collection.create({ userId, flower, memo, imageUrl, createdAt: new Date() });
-    res.status(201).json(entry);
-  } catch (error) {
-    res.status(500).json({ error: "서버 오류" });
+    const newEntry = new Collection({
+      userId,
+      flower,
+      memo,
+      date,
+      imageBase64,
+    });
+    await newEntry.save();
+    return res.status(200).json({ success: true, message: "도감 저장 완료" });
+  } catch (err) {
+    console.error("도감 저장 오류:", err);
+    return errorResponse(res, 500, "서버 오류로 저장 실패");
   }
 });
+
+module.exports = router;

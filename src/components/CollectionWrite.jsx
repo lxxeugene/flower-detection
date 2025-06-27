@@ -1,64 +1,67 @@
-import React, { useState } from "react";
+// CollectionWritePage.jsx (예시)
+import React, { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CollectionWritePage = () => {
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { flower, imageUrl } = location.state || {};
+
   const [memo, setMemo] = useState("");
+  const [date, setDate] = useState(""); // 날짜 저장
+  const [imageBase64, setImageBase64] = useState("");
+
+  // 날짜 설정
+  useEffect(() => {
+    const now = new Date();
+    const formatted = now.toISOString().split("T")[0]; // YYYY-MM-DD
+    setDate(formatted);
+  }, []);
+
+  // 이미지 base64 변환
+  useEffect(() => {
+    if (!imageUrl) return;
+
+    fetch(imageUrl)
+      .then(res => res.blob())
+      .then(blob => {
+        const reader = new FileReader();
+        reader.onloadend = () => setImageBase64(reader.result); // base64 문자열 저장
+        reader.readAsDataURL(blob);
+      });
+  }, [imageUrl]);
 
   const handleSave = async () => {
-    const userId = localStorage.getItem("userId") || "guest";
-
     try {
       await axios.post("http://localhost:8000/collection", {
-        userId,
+        userId: localStorage.getItem("userId") || "guest",
         flower,
         memo,
-        imageUrl,
-        date: new Date().toISOString(),
+        date,
+        imageBase64,
       });
-      alert("🌼 도감에 저장되었습니다!");
-      navigate("/collection");
-    } catch (error) {
-      console.error("도감 저장 실패:", error);
-      alert("❌ 저장 중 오류가 발생했습니다");
+      alert("도감에 저장되었습니다!");
+      navigate("/");
+    } catch (err) {
+      alert("저장 실패!");
+      console.error(err);
     }
   };
 
-  if (!flower) {
-    return <div>잘못된 접근입니다. 꽃 정보를 찾을 수 없습니다.</div>;
-  }
-
   return (
-    <div style={{ maxWidth: "600px", margin: "2rem auto", padding: "1rem", backgroundColor: "white", borderRadius: "8px" }}>
-      <h2 style={{ color: "#2e7d32" }}>{flower.flowername_kr} 도감 작성</h2>
-
-      {imageUrl && (
-        <img
-          src={imageUrl}
-          alt="선택된 꽃"
-          style={{ width: "100%", maxHeight: "300px", objectFit: "contain", marginBottom: "1rem" }}
-        />
-      )}
-
-      <p><strong>영문명:</strong> {flower.flowername}</p>
-      <p><strong>학명:</strong> {flower.binomialName}</p>
-      <p><strong>서식지:</strong> {flower.habitat}</p>
-
-      <label style={{ display: "block", marginTop: "1rem" }}>메모:</label>
+    <div style={{ padding: "1rem" }}>
+      <h2>도감 작성</h2>
+      <p><strong>이름:</strong> {flower?.flowername_kr}</p>
+      <p><strong>날짜:</strong> {date}</p>
+      {imageUrl && <img src={imageUrl} alt="사용자 사진" width="200" />}
       <textarea
         value={memo}
         onChange={(e) => setMemo(e.target.value)}
-        style={{ width: "100%", minHeight: "100px", marginTop: "0.5rem" }}
-        placeholder="관찰한 내용을 기록하세요."
+        placeholder="메모를 남겨보세요"
+        style={{ display: "block", width: "100%", minHeight: "80px", marginTop: "1rem" }}
       />
-
-      <button
-        onClick={handleSave}
-        style={{ marginTop: "1rem", padding: "10px 20px", backgroundColor: "#4CAF50", color: "white", border: "none", borderRadius: "4px", cursor: "pointer" }}
-      >
+      <button onClick={handleSave} style={{ marginTop: "1rem", padding: "0.5rem 1rem" }}>
         저장하기
       </button>
     </div>
