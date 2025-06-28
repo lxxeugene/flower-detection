@@ -20,6 +20,7 @@ app.use((req, res, next) => {
 app.use("/flowers", require("./routes/flowers"));
 app.use("/naver-shopping", require("./routes/naverShopping"));
 app.use("/naver-images", require("./routes/naverImage"));
+app.use("/collection", require("./routes/collection"));
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
