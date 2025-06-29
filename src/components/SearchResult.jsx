@@ -18,13 +18,15 @@ const SearchResult = (props) => {
   };
 
 const goToWritePage = () => {
-    navigate("/collection/new", {
-      state: {
-        flower: flowerInfo,
-        imageUrl: imageRef?.current?.src || "",
-      },
-    });
-  };
+  const imageUrl = imageRef?.current?.src || "";
+  if (!flowerInfo) return;
+  if (typeof window.setCollectionData === "function") {
+    window.setCollectionData({ flower: flowerInfo, imageUrl });
+  } else {
+    alert("도감 작성을 열 수 없습니다.");
+  }
+};
+
 
   useEffect(() => {
     const fetchFlowerInfo = async () => {

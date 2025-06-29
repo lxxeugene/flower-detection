@@ -9,9 +9,9 @@ const collectionSchema = new mongoose.Schema({
     binomialName: String,
     classification: String,
   },
-  memo: { type: String },
-  date: { type: String }, // YYYY-MM-DD
-  imageBase64: { type: String }, // base64 인코딩 이미지
+  image: String, // base64
+  date: Date,
+  memo: String,
 });
 
 module.exports = mongoose.model("Collection", collectionSchema);

@@ -11,8 +11,7 @@ import Work from "./components/Guide";
 import Button from "@mui/material/Button";
 import { Box, Slider } from "@mui/material";
 import SettingsIcon from '@mui/icons-material/Settings';
-import CollectionWriteModal from "./components/CollectionWrite";
-import { useNavigate } from "react-router-dom";
+import CollectionWriteModal from "./components/CollectionWriteModal";
 
 const Main = () => {
   const [loading, setLoading] = useState({ loading: true, progress: 0 }); // loading state
@@ -33,7 +32,6 @@ const Main = () => {
   const inputForm = useRef();
   const [scoreThreshold, setScoreThreshold] = useState(0.6);
   const [collectionData, setCollectionData] = useState(null);
-  const navigate = useNavigate();
 
   // preprocess function
   const numClass = labels.length;
@@ -107,6 +105,11 @@ const Main = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dict]);
+
+useEffect(() => {
+  window.setCollectionData = setCollectionData;
+  return () => { window.setCollectionData = null };
+}, []);
 
 
   // 이미지 전처리 함수 
@@ -301,7 +304,6 @@ const Main = () => {
   // 도감 작성 완료 후 이동
   const handleSaveComplete = () => {
     closeCollectionModal();
-    navigate("/collection"); // 저장 후에만 페이지 이동
   };
   
   return (
@@ -379,7 +381,9 @@ const Main = () => {
           flower={collectionData.flower}
           imageUrl={collectionData.imageUrl}
           onClose={() => setCollectionData(null)}
-          onSave={() => setCollectionData(null)}
+          onSave={() => {
+            handleSaveComplete();
+          }}
         />
       )}
     </div>
