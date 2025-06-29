@@ -11,8 +11,8 @@ import Work from "./components/Guide";
 import Button from "@mui/material/Button";
 import { Box, Slider } from "@mui/material";
 import SettingsIcon from '@mui/icons-material/Settings';
-
-
+import CollectionWriteModal from "./components/CollectionWrite";
+import { useNavigate } from "react-router-dom";
 
 const Main = () => {
   const [loading, setLoading] = useState({ loading: true, progress: 0 }); // loading state
@@ -32,6 +32,8 @@ const Main = () => {
   const [settingVisible, setSettingVisible] = useState(false);
   const inputForm = useRef();
   const [scoreThreshold, setScoreThreshold] = useState(0.6);
+  const [collectionData, setCollectionData] = useState(null);
+  const navigate = useNavigate();
 
   // preprocess function
   const numClass = labels.length;
@@ -293,7 +295,14 @@ const Main = () => {
     return `${value}`;
   }
   
-  
+  // 도감 작성 모달 닫기
+  const closeCollectionModal = () => setCollectionData(null);
+
+  // 도감 작성 완료 후 이동
+  const handleSaveComplete = () => {
+    closeCollectionModal();
+    navigate("/collection"); // 저장 후에만 페이지 이동
+  };
   
   return (
     <div className="Main" >
@@ -365,6 +374,14 @@ const Main = () => {
       <Button onClick={handleClick} variant="outlined" style={{marginBottom: "1rem", fontWeight: "bold"}}>
         {isVisible ? "닫기" : "? 사용법"}
       </Button>
+      {collectionData && (
+        <CollectionWriteModal
+          flower={collectionData.flower}
+          imageUrl={collectionData.imageUrl}
+          onClose={() => setCollectionData(null)}
+          onSave={() => setCollectionData(null)}
+        />
+      )}
     </div>
 
   );

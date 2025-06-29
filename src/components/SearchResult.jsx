@@ -156,8 +156,11 @@ const [memo, setMemo] = useState("");
                 </td>
               </tr>
               <tr>
+                  <td style={{ color: "black", width: "15%" }}>
+                      <strong>도감 작성</strong>
+                  </td>
                   <td colSpan={2}>
-                    <div style={{ marginTop: "1rem" }}>
+                    <div>
                       <button onClick={goToWritePage} style={{
                         backgroundColor: "#4CAF50",
                         color: "white",
@@ -166,7 +169,7 @@ const [memo, setMemo] = useState("");
                         borderRadius: "4px",
                         cursor: "pointer"
                       }}>
-                        🌼 도감 작성
+                        작성하기
                       </button>
                     </div>
                   </td>

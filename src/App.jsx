@@ -22,7 +22,6 @@ const App = () => {
             <Route path='/about' element={<About />}/>
             <Route path='/guide' element={<Guide />}/>
             <Route path='/searchResult' element={<SearchResult />}/>
-            <Route path="/collection/new" element={<CollectionWrite />} />
           </Routes>
         </div>
       </div>
