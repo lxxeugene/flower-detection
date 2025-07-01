@@ -16,9 +16,11 @@ router.post("/", async (req, res) => {
       flower,
       memo,
       date,
-      imageBase64,
+      image: imageBase64,
     });
     await newEntry.save();
+    console.log("저장 요청:", { userId, flower, memo, date, imageBase64: imageBase64?.slice(0, 50) });
+
     return res.status(200).json({ success: true, message: "도감 저장 완료" });
   } catch (err) {
     console.error("도감 저장 오류:", err);

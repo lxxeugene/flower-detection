@@ -25,6 +25,8 @@ const CollectionWriteModal = ({ flower, imageUrl, onClose, onSave }) => {
 
   const handleSave = async () => {
     try {
+        console.log("req.body 확인:", req.body);
+
       await axios.post("http://localhost:8000/collection", {
         userId: localStorage.getItem("userId") || "guest",
         flower,
@@ -32,6 +34,8 @@ const CollectionWriteModal = ({ flower, imageUrl, onClose, onSave }) => {
         date,
         imageBase64,
       });
+      console.log({ userId: localStorage.getItem("userId") || "guest", flower, memo, date, imageBase64 });
+
       alert("도감에 저장되었습니다!");
       onSave();
     } catch (err) {
