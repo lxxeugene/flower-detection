@@ -66,7 +66,7 @@ const CollectionWriteModal = ({ flower, imageUrl, onClose, onSave }) => {
         gap: "10px"
       }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <h2 style={{ margin: 0 }}>도감 작성</h2>
+          <h2 style={{ margin: "0 5px" }}>도감 작성</h2>
           <button
               onClick={onClose}
               style={{
@@ -84,8 +84,8 @@ const CollectionWriteModal = ({ flower, imageUrl, onClose, onSave }) => {
               <CloseIcon />
             </button>
         </div>
-        <p><strong>이름:</strong> {flower?.flowername_kr}</p>
-        <p><strong>날짜:</strong> {date}</p>
+        <p style={{margin: "0 5px"}}><strong>이름:</strong> {flower?.flowername_kr}</p>
+        <p style={{margin: "0 5px"}}><strong>날짜:</strong> {date}</p>
         {imageUrl && (
           <img
             src={imageUrl}
@@ -103,11 +103,14 @@ const CollectionWriteModal = ({ flower, imageUrl, onClose, onSave }) => {
           onChange={(e) => setMemo(e.target.value)}
           placeholder="메모를 남겨보세요"
           style={{
-            width: "100%",
             minHeight: "80px",
+            resize: "none",
             borderRadius: "4px",
             border: "1px solid #ccc",
-            padding: "8px"
+            padding: "8px",
+            pointerEvents: "auto",
+            userSelect: "text",
+            margin: "0 5px",
           }}
         />
         <button
@@ -115,7 +118,7 @@ const CollectionWriteModal = ({ flower, imageUrl, onClose, onSave }) => {
           style={{
             backgroundColor: "#4CAF50",
             color: "white",
-            padding: "10px",
+            padding: "8px",
             border: "none",
             borderRadius: "4px",
             cursor: "pointer",
