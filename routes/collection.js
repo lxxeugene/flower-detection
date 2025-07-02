@@ -5,10 +5,10 @@ const errorResponse = require("../utils/errorResponse");
 
 router.post("/", async (req, res) => {
   const { userId, flower, memo, date, imageBase64 } = req.body;
-
-  if (!flower || !date || !imageBase64) {
-    return errorResponse(res, 400, "필수 데이터 누락");
-  }
+//
+//  if (!flower || !date || !imageBase64) {
+//    return errorResponse(res, 400, "필수 데이터 누락");
+//  }
 
   try {
     const newEntry = new Collection({

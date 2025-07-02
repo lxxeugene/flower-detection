@@ -25,7 +25,6 @@ const CollectionWriteModal = ({ flower, imageUrl, onClose, onSave }) => {
 
   const handleSave = async () => {
     try {
-        console.log("req.body 확인:", req.body);
 
       await axios.post("http://localhost:8000/collection", {
         userId: localStorage.getItem("userId") || "guest",
