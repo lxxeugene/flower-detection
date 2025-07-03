@@ -7,7 +7,7 @@ import SearchResult from "./components/SearchResult";
 import Guide from "./components/Guide";
 import Home from "./components/Home"
 import NaverShopping from "./components/NaverShopping";
-import CollectionWrite from "./components/CollectionWriteModal";
+import CollectionPage from "./components/CollectionPage";
 
 const App = () => {
   return (
@@ -22,7 +22,7 @@ const App = () => {
             <Route path='/about' element={<About />}/>
             <Route path='/guide' element={<Guide />}/>
             <Route path='/searchResult' element={<SearchResult />}/>
-            <Route path='/CollectionWrite' element={<CollectionWrite />}/>
+            <Route path="/collection" element={<CollectionPage />} />
           </Routes>
         </div>
       </div>

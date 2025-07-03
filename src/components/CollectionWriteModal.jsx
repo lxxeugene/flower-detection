@@ -100,7 +100,10 @@ const CollectionWriteModal = ({ flower, imageUrl, onClose, onSave }) => {
         )}
         <textarea
           value={memo}
-          onChange={(e) => setMemo(e.target.value)}
+          onChange={(e) => {
+              console.log("📝 입력됨:", e.target.value);
+              setMemo(e.target.value);
+            }}
           placeholder="메모를 남겨보세요"
           style={{
             minHeight: "80px",

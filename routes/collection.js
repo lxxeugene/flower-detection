@@ -28,4 +28,15 @@ router.post("/", async (req, res) => {
   }
 });
 
+// 도감 목록 조회 (userId 기반)
+router.get("/:userId", async (req, res) => {
+  try {
+    const collections = await Collection.find({ userId: req.params.userId }).sort({ date: -1 });
+    return res.status(200).json(collections);
+  } catch (err) {
+    console.error("도감 조회 오류:", err);
+    return errorResponse(res, 500, "도감 조회 실패");
+  }
+});
+
 module.exports = router;
