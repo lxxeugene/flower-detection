@@ -7,7 +7,7 @@ import Upload from "@mui/icons-material/Upload";
 
 import { Stack } from "@mui/material";
 import HideImage from "@mui/icons-material/HideImage";
-
+import SearchResult from "./SearchResult";
 
 const ButtonHandler = ({ imageRef, cameraRef, handleResetMyDict }) => {
   const [streaming, setStreaming] = useState(null); // streaming state
@@ -42,6 +42,8 @@ const ButtonHandler = ({ imageRef, cameraRef, handleResetMyDict }) => {
       }
     };
   }, [streaming, cameraRef, webcam]);
+
+  const [selectedFlowerLabel, setSelectedFlowerLabel] = useState(null);
 
   // 이미지 또는 웹캠을 사용할 수 있는 버튼을 화면에 출력
   // streaming 상태에 따라 출력되는 버튼들을 변경
@@ -137,13 +139,18 @@ const ButtonHandler = ({ imageRef, cameraRef, handleResetMyDict }) => {
           <Button
             variant="contained"
             color="secondary"
-            style={{ marginLeft: "8px" }}
             onClick={() => window.location.href = "/collection"}
           >
             도감 보기
           </Button>
       </Stack>
       {/* 이전 검색한 꽃 리스트 (히스토리) */}
+      {selectedFlowerLabel && (
+        <div style={{ marginTop: "2rem", padding: "0 1rem" }}>
+          <h3 style={{ textAlign: "center", color: "#444" }}>선택한 꽃 정보</h3>
+          <SearchResult label={selectedFlowerLabel} imageRef={imageRef} />
+        </div>
+      )}
       <div style={{ marginTop: "2rem", padding: "0 1rem" }}>
         <h3 style={{ textAlign: "center", color: "#444" }}>이전 검색한 꽃</h3>
         <div style={{
@@ -160,7 +167,7 @@ const ButtonHandler = ({ imageRef, cameraRef, handleResetMyDict }) => {
               padding: "12px",
               width: "160px",
               boxShadow: "0 1px 4px rgba(0,0,0,0.1)"
-            }}>
+            }} onClick={() => setSelectedFlowerLabel(f.flowername)}>
               <h4 style={{ margin: "0 0 4px", color: "#2e7d32" }}>{f.flowername_kr}</h4>
               <p style={{ fontSize: "13px", margin: 0 }}>{f.flowername}</p>
               <p style={{ fontSize: "12px", margin: "2px 0", color: "#777" }}>{f.habitat}</p>
