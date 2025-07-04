@@ -133,6 +133,15 @@ const ButtonHandler = ({ imageRef, cameraRef, handleResetMyDict }) => {
             </Button>
           )}
         </div>
+        {/* 도감 보기 버튼 */}
+          <Button
+            variant="contained"
+            color="secondary"
+            style={{ marginLeft: "8px" }}
+            onClick={() => window.location.href = "/collection"}
+          >
+            도감 보기
+          </Button>
       </Stack>
       {/* 이전 검색한 꽃 리스트 (히스토리) */}
       <div style={{ marginTop: "2rem", padding: "0 1rem" }}>

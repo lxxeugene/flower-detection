@@ -17,7 +17,7 @@ const CollectionPage = () => {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>🌸 나의 꽃 도감</h2>
+      <h2>나의 식물 도감</h2>
       {collections.length === 0 ? (
         <p>저장된 꽃이 없습니다.</p>
       ) : (
