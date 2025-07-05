@@ -163,13 +163,25 @@ const ButtonHandler = ({ imageRef, cameraRef, handleResetMyDict }) => {
           marginTop: "1rem"
         }}>
           {(JSON.parse(localStorage.getItem("flowerHistory")) || []).map((f, i) => (
-            <div key={i} style={{
-              backgroundColor: "#f6f6f6",
-              borderRadius: "10px",
-              padding: "12px",
-              width: "160px",
-              boxShadow: "0 1px 4px rgba(0,0,0,0.1)"
-            }} onClick={() => setSelectedFlowerLabel(f.flowername)}>
+            <div
+              key={i}
+              style={{
+                backgroundColor: "#f6f6f6",
+                borderRadius: "10px",
+                padding: "12px",
+                width: "160px",
+                boxShadow: "0 1px 4px rgba(0,0,0,0.1)",
+                cursor: "pointer",
+                border: selectedFlowerLabel === f.flowername ? "2px solid #2e7d32" : "none"
+              }}
+              onClick={() => {
+                if (selectedFlowerLabel === f.flowername) {
+                  setSelectedFlowerLabel(null);
+                } else {
+                  setSelectedFlowerLabel(f.flowername);
+                }
+              }}
+            >
               <h4 style={{ margin: "0 0 4px", color: "#2e7d32" }}>{f.flowername_kr}</h4>
               <p style={{ fontSize: "13px", margin: 0 }}>{f.flowername}</p>
               <p style={{ fontSize: "12px", margin: "2px 0", color: "#777" }}>{f.habitat}</p>

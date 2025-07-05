@@ -314,6 +314,33 @@ useEffect(() => {
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;꽃 찾아보기
           <Button size="small"><SettingsIcon fontSize="small" color="action" onClick={handleSetting} /></Button>
           </p>
+        {settingVisible && (
+                <Box sx={{width: '75%', maxWidth: 500, alignItems: 'center'}}>
+                  <Slider
+                      aria-label="ScoreThreshold"
+                      defaultValue={0.6}
+                      getAriaValueText={valuetext}
+                      valueLabelDisplay="auto"
+                      step={0.05}
+                      marks
+                      min={0.5}
+                      max={0.95}
+                      onChange={newScoreThreshold}
+                  />
+                  <p style={{
+                  textAlign: "center",
+                  color: "#000000",
+                  fontWeight: "bold",
+                }} >ScoreThreshold: {scoreThreshold}</p>
+                <p style={{
+                  textAlign: "center",
+                  marginBottom: "1rem",
+                  color: "#C00000",
+                  fontWeight: "bold",
+                  wordBreak: "keep-all"
+                }} >* ScoreThreshold 값이 1에 가까울수록 더 정확한 꽃만 탐지합니다.</p>
+                </Box>
+        )}
         <h1>YOLOv8 모델을 사용한 꽃 탐지</h1>
         <p>꽃 사진이나 웹캠을 통해 AI가 꽃을 찾아 알려드립니다.</p>
         <p>아래 옵션 중 하나를 선택해서 시작하세요!</p>
@@ -343,33 +370,6 @@ useEffect(() => {
           </div>
         </div>
       </div>
-      {settingVisible && (
-        <Box sx={{width: '75%', maxWidth: 500, alignItems: 'center'}}>
-          <Slider
-              aria-label="ScoreThreshold"
-              defaultValue={0.6}
-              getAriaValueText={valuetext}
-              valueLabelDisplay="auto"
-              step={0.05}
-              marks
-              min={0.5}
-              max={0.95}
-              onChange={newScoreThreshold}
-          />      
-          <p style={{
-          textAlign: "center", 
-          color: "#000000",
-          fontWeight: "bold",
-        }} >ScoreThreshold: {scoreThreshold}</p>
-        <p style={{
-          textAlign: "center", 
-          marginBottom: "1rem",
-          color: "#C00000",
-          fontWeight: "bold",
-          wordBreak: "keep-all"
-        }} >* ScoreThreshold 값이 1에 가까울수록 더 정확한 꽃만 탐지합니다.</p>
-        </Box> 
-      )}
       <div ref={inputForm}>
         {isVisible && <Work />}
       </div>
