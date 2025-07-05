@@ -136,6 +136,7 @@ const ButtonHandler = ({ imageRef, cameraRef, handleResetMyDict }) => {
           )}
         </div>
         {/* 도감 보기 버튼 */}
+        <div style={streaming === null ? { marginRight: '8px' } : {}}>
           <Button
             variant="contained"
             color="secondary"
@@ -143,6 +144,7 @@ const ButtonHandler = ({ imageRef, cameraRef, handleResetMyDict }) => {
           >
             도감 보기
           </Button>
+           </div>
       </Stack>
       {/* 이전 검색한 꽃 리스트 (히스토리) */}
       {selectedFlowerLabel && (
